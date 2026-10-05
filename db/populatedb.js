@@ -4,13 +4,13 @@ const SQL = `
 CREATE TABLE IF NOT EXISTS games (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, 
     name VARCHAR (255),
-    genre TEXT[],
+    genres TEXT[],
     release_year INTEGER,
-    developer TEXT[],
+    developers TEXT[],
     description TEXT
 );
 
-INSERT INTO games (name, genre, release_year, developer, description)
+INSERT INTO games (name, genres, release_year, developers, description)
 VALUES (
     'Rocket League',
     '{"sports", "action", "competitive"}',
@@ -19,7 +19,7 @@ VALUES (
     'Physics-based competitive soccer game with rocket-powered flying cars'
 );
 
-INSERT INTO games (name, genre, release_year, developer, description)
+INSERT INTO games (name, genres, release_year, developers, description)
 VALUES (
     'Minecraft',
     '{"sandbox", "adventure", "survival"}',

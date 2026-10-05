@@ -1,0 +1,14 @@
+<div>
+    <div><%= game.name %></div>
+    <div>
+        <% for(let i = 0; i < game.developers.length; i++ ) { %>
+           <span><%= game.developers[i].charAt(0).toUpperCase() + game.developers[i].slice(1); %><%= i !== game.developers.length - 1 ? "," : ` | ${game.release_year}` %></span> 
+        <% } %>
+    </div>
+    <div>
+        <% for(let i = 0; i < game.genres.length; i++ ) { %>
+           <span><%= game.genres[i].charAt(0).toUpperCase() + game.genres[i].slice(1); %><%= i !== game.genres.length - 1 ? ", " : ""%></span> 
+        <% } %>        
+    </div>
+    <div><%= game.description %></div>
+</div>

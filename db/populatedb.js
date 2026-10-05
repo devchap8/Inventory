@@ -7,28 +7,25 @@ CREATE TABLE IF NOT EXISTS games (
     genre TEXT[],
     release_year INTEGER,
     developer TEXT[],
-    prequel TEXT[],
-    sequel TEXT[]
+    description TEXT
 );
 
-INSERT INTO games (name, genre, release_year, developer, prequel, sequel)
+INSERT INTO games (name, genre, release_year, developer, description)
 VALUES (
     'Rocket League',
     '{"sports", "action", "competitive"}',
     2015,
     '{"Psyonix", "Epic Games"}',
-    '{"Supersonic Acrobatic Rocket-Powered Battle Cars"}',
-    NULL
+    'Physics-based competitive soccer game with rocket-powered flying cars'
 );
 
-INSERT INTO games (name, genre, release_year, developer, prequel, sequel)
+INSERT INTO games (name, genre, release_year, developer, description)
 VALUES (
     'Minecraft',
     '{"sandbox", "adventure", "survival"}',
     2011,
     '{"Mojang", "Microsoft"}',
-    NULL,
-    NULL
+    'Open-world sandbox survival game where players can build almost anything'
 );
 `
 

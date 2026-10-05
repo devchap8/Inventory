@@ -6,11 +6,14 @@
     <title><%= title %></title>
 </head>
 <body>
-    <h1>All Games</h1>
-    <% if(locals.games) { %>
-        <% games.forEach(game => { %>
-            <%- include("partials/gameContainer.ejs", {game: game}) %>
-        <% }) %>
-    <% } %>
+    <nav>
+        <h2>Genres</h2>
+        <ul>
+            <% genres.forEach(genre => {%> 
+                <li><a href="genre/<%= genre %>"><%= genre.charAt(0).toUpperCase() + genre.slice(1) %></a></li>
+            <% }) %>
+        </ul>
+    </nav>
+    <%- include("partials/gameDisplay.ejs", {games: games, genre: "All"}) %>
 </body>
 </html>

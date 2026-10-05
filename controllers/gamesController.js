@@ -3,9 +3,11 @@ const db = require("../db/queries");
 
 async function gamesListGet(req, res) {
     const games = await db.getAllGames();
+    const genres = await db.getAllGenres();
     res.render("index",  {
         title: "Games Storage",
-        games: games
+        games: games,
+        genres: genres,
     });
 };
 

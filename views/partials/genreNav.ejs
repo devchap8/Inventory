@@ -2,7 +2,7 @@
     <h2>Genres</h2>
     <ul>
         <% genres.forEach(genre => {%> 
-            <li><a href="genre/<%= genre %>"><%= genre.charAt(0).toUpperCase() + genre.slice(1) %></a></li>
+            <li><a href="/genre/<%= genre %>"><%= genre.charAt(0).toUpperCase() + genre.slice(1) %></a></li>
         <% }) %>
     </ul>
 </nav>

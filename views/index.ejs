@@ -6,8 +6,10 @@
     <title><%= title %></title>
 </head>
 <body>
+    <a href="/">Home</a>
+
     <%- include("partials/genreNav.ejs", {genres: genres}); %>
 
-    <%- include("partials/gameDisplay.ejs", {games: games, genre: "All"}) %>
+    <%- include("partials/gameDisplay.ejs", {games: games, genre: genreName}) %>
 </body>
 </html>

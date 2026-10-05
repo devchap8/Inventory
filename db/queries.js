@@ -11,7 +11,16 @@ async function getAllGenres() {
     return Array.from(genreSet);
 }
 
+async function getGamesByGenre(genre) {
+    const filteredGames = await pool.query(`
+        SELECT * FROM games 
+        WHERE genres @> ARRAY['${genre.toLowerCase()}'] 
+        `);
+    return filteredGames.rows;
+}
+
 module.exports = {
     getAllGames,
-    getAllGenres
+    getAllGenres,
+    getGamesByGenre
 };

@@ -4,5 +4,6 @@ const gamesController = require("../controllers/gamesController");
 const gamesRouter = Router();
 
 gamesRouter.get("/", gamesController.gamesListGet);
+gamesRouter.get("/genre/:genreName", gamesController.filteredGamesListGet);
 
 module.exports = gamesRouter;

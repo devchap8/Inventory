@@ -8,8 +8,21 @@ async function gamesListGet(req, res) {
         title: "Games Storage",
         games: games,
         genres: genres,
+        genreName: "All",
     });
 };
 
+async function filteredGamesListGet(req, res) {
+    const genres = await db.getAllGenres();
+    const genreName = req.params.genreName.charAt(0).toUpperCase() + req.params.genreName.slice(1);
+    const filteredGamesList = await db.getGamesByGenre(genreName);
+    res.render("index",  {
+        title: `${genreName} Games`,
+        games: filteredGamesList,
+        genres: genres,
+        genreName: genreName,
+    });    
+}
 
-module.exports = {gamesListGet};
+
+module.exports = {gamesListGet, filteredGamesListGet};

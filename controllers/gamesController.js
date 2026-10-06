@@ -69,11 +69,22 @@ async function gamesEditGet(req, res) {
     res.render("gameEdit", {
         title: `Edit ${game.name}`,
         game,
+        error: null,
     });
 }
 
 async function gamesEditPost(req, res) {
     const data = req.body;
+
+    if (data.password !== process.env.ADMIN_PASSWORD) {
+        const game = await db.getGameById(req.params.gameId);
+        return res.status(403).render("gameEdit", {
+            title: `Edit ${game.name}`,
+            game,
+            error: "Wrong password",
+        });
+    }
+
     await db.editGame(data, req.params.gameId);
     res.redirect("/");
 }

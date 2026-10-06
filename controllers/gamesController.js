@@ -65,7 +65,6 @@ async function gamesAddPost(req, res) {
 async function gamesEditGet(req, res) {
     const id = req.params.gameId;
     const game = await db.getGameById(id);
-    console.log(game.description);
     res.render("gameEdit", {
         title: `Edit ${game.name}`,
         game,

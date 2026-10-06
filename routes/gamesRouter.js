@@ -6,6 +6,9 @@ const gamesRouter = Router();
 gamesRouter.get("/", gamesController.gamesListGet);
 gamesRouter.get("/genre/:genreName", gamesController.filteredGamesListGet);
 
+gamesRouter.get("/add", gamesController.gamesAddGet);
+gamesRouter.post("/add", gamesController.gamesAddPost);
+
 gamesRouter.get("/delete/:gameId", gamesController.deleteGamesScreenGet);
 gamesRouter.post("/delete/:gameId/delete", gamesController.deleteGamePost);
 

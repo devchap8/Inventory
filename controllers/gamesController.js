@@ -35,8 +35,7 @@ async function deleteGamesScreenGet(req, res) {
 
 async function deleteGamePost(req, res) {
     const id = req.params.gameId;
-    console.log(req.params);
-    const { password } = req.body;
+    const {password} = req.body;
 
     if (password !== process.env.ADMIN_PASSWORD) {
         const game = await db.getGameById(id);
@@ -51,5 +50,23 @@ async function deleteGamePost(req, res) {
     res.redirect("/");    
 }
 
+async function gamesAddGet(req, res) {
+    res.render("gamesAdd", {
+        title: "Add Game"
+    });
+}
 
-module.exports = {gamesListGet, filteredGamesListGet, deleteGamesScreenGet, deleteGamePost};
+async function gamesAddPost(req, res) {
+    const data = req.body;
+    await db.addGame(data);
+    res.redirect("/");
+}
+
+
+module.exports = {gamesListGet, 
+    filteredGamesListGet, 
+    deleteGamesScreenGet, 
+    deleteGamePost, 
+    gamesAddGet,
+    gamesAddPost,
+};

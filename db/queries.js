@@ -15,7 +15,7 @@ async function getGamesByGenre(genre) {
     const filteredGames = await pool.query(`
         SELECT * FROM games 
         WHERE genres @> ARRAY['${genre.toLowerCase()}'] 
-        `);
+    `);
     return filteredGames.rows;
 }
 
@@ -23,7 +23,7 @@ async function getGameById(gameId) {
     const game = await pool.query(`
         SELECT * FROM games
         WHERE id = ${gameId};
-        `);
+    `);
     return game.rows[0];
 }
 
@@ -31,7 +31,23 @@ async function deleteGame(gameId) {
     await pool.query(`
         DELETE FROM games
         WHERE id = ${gameId};
-        `);
+    `);
+}
+
+function splitAndTrim(str) {
+  return str.split(",")
+  .map(item => item.trim())
+  .filter(item => item !== "");;
+}
+
+async function addGame(data) {
+    const genreList = splitAndTrim(data.genres);
+    const devList = splitAndTrim(data.developers);
+    await pool.query(
+        `INSERT INTO games (name, genres, release_year, developers, description)
+        VALUES ($1, $2, $3, $4, $5);`,
+        [data.name, genreList, data.year, devList, data.description]
+    );
 }
 
 module.exports = {
@@ -39,5 +55,6 @@ module.exports = {
     getAllGenres,
     getGamesByGenre,
     getGameById,
-    deleteGame
+    deleteGame,
+    addGame
 };

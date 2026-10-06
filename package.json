@@ -6,6 +6,7 @@
     "pg": "^8.23.1"
   },
   "scripts": {
-    "start": "node --env-file=.env --watch app.js"
+    "start dev": "node --env-file=.env --watch app.js",
+    "start": "node app.js"
   }
 }

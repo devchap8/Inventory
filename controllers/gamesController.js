@@ -24,5 +24,32 @@ async function filteredGamesListGet(req, res) {
     });    
 }
 
+async function deleteGamesScreenGet(req, res) {
+    const game = await db.getGameById(req.params.gameId);
+    res.render("gameDelete", {
+        game, 
+        title: `Delete ${game.name}`,
+        error: null,
+    });
+}
 
-module.exports = {gamesListGet, filteredGamesListGet};
+async function deleteGamePost(req, res) {
+    const id = req.params.gameId;
+    console.log(req.params);
+    const { password } = req.body;
+
+    if (password !== process.env.ADMIN_PASSWORD) {
+        const game = await db.getGameById(id);
+        return res.status(403).render("gameDelete", {
+            title: "Delete game",
+            game,
+            error: "Wrong password",
+        });
+    }
+
+    await db.deleteGame(id);
+    res.redirect("/");    
+}
+
+
+module.exports = {gamesListGet, filteredGamesListGet, deleteGamesScreenGet, deleteGamePost};

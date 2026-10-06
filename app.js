@@ -4,6 +4,8 @@ const path = require("node:path");
 const app = express();
 const gamesRouter = require("./routes/gamesRouter");
 
+app.locals.gamesController = require("./controllers/gamesController");
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));

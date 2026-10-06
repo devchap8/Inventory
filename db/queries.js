@@ -19,8 +19,25 @@ async function getGamesByGenre(genre) {
     return filteredGames.rows;
 }
 
+async function getGameById(gameId) {
+    const game = await pool.query(`
+        SELECT * FROM games
+        WHERE id = ${gameId};
+        `);
+    return game.rows[0];
+}
+
+async function deleteGame(gameId) {
+    await pool.query(`
+        DELETE FROM games
+        WHERE id = ${gameId};
+        `);
+}
+
 module.exports = {
     getAllGames,
     getAllGenres,
-    getGamesByGenre
+    getGamesByGenre,
+    getGameById,
+    deleteGame
 };

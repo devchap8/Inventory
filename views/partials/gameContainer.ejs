@@ -1,4 +1,4 @@
-<div>
+<div id="<%= game.id %>">
     <div><%= game.name %></div>
     <div>
         <% for(let i = 0; i < game.developers.length; i++ ) { %>
@@ -11,4 +11,8 @@
         <% } %>        
     </div>
     <div><%= game.description %></div>
+    <div>
+        <button>Edit</button>
+        <a href="/delete/<%= game.id %>">Delete</a>
+    </div>
 </div>

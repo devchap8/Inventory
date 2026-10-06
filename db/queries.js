@@ -37,7 +37,7 @@ async function deleteGame(gameId) {
 function splitAndTrim(str) {
   return str.split(",")
   .map(item => item.trim())
-  .filter(item => item !== "");;
+  .filter(item => item !== "");
 }
 
 async function addGame(data) {
@@ -50,11 +50,27 @@ async function addGame(data) {
     );
 }
 
+async function editGame(data, id) {
+    const genreList = splitAndTrim(data.genres);
+    const devList = splitAndTrim(data.developers);
+    await pool.query(
+    `UPDATE games
+    SET name = $1,
+        genres = $2,
+        release_year = $3,
+        developers = $4,
+        description = $5
+    WHERE id = $6`,
+    [data.name, genreList, data.year, devList, data.description, id]
+    );
+}
+
 module.exports = {
     getAllGames,
     getAllGenres,
     getGamesByGenre,
     getGameById,
     deleteGame,
-    addGame
+    addGame,
+    editGame,
 };

@@ -62,11 +62,29 @@ async function gamesAddPost(req, res) {
     res.redirect("/");
 }
 
+async function gamesEditGet(req, res) {
+    const id = req.params.gameId;
+    const game = await db.getGameById(id);
+    console.log(game.description);
+    res.render("gameEdit", {
+        title: `Edit ${game.name}`,
+        game,
+    });
+}
 
-module.exports = {gamesListGet, 
+async function gamesEditPost(req, res) {
+    const data = req.body;
+    await db.editGame(data, req.params.gameId);
+    res.redirect("/");
+}
+
+module.exports = {
+    gamesListGet, 
     filteredGamesListGet, 
     deleteGamesScreenGet, 
     deleteGamePost, 
     gamesAddGet,
     gamesAddPost,
+    gamesEditGet,
+    gamesEditPost
 };

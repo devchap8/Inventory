@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include("partials/topNav.ejs") %>
+
+    <h1>Edit <%= game.name %></h1>
+
+    <form action="/edit/<%= game.id %>" method="POST">
+        <div>
+            <label for="name">Title: </label>
+            <input type="text" name="name" id="name" value="<%= game.name %>">
+        </div>
+        <div>
+            <label for="genres">Genres (separate with commas): </label>
+            <input type="text" name="genres" id="genres" value="<%= game.genres %>">
+        </div>
+        <div>
+            <label for="year">Release Year: </label>
+            <input type="text" name="year" id="year" value="<%= game.release_year %>">
+        </div>
+        <div>
+            <label for="developers">Developers (separate with commas): </label>
+            <input type="text" name="developers" id="developers" value="<%= game.developers %>">
+        </div>
+        <div>
+            <label for="description">Description: </label>
+            <textarea name="description" id="description"><%= game.description %></textarea>
+        </div>
+        <button type="submit">Edit Game</button>
+    </form>    
+</body>
+</html>

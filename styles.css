@@ -55,7 +55,7 @@ h1 {
 
 /* Top nav */
 
-body > div:first-child {
+.top-nav {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -68,7 +68,7 @@ body > div:first-child {
     border-bottom: 1px solid var(--border);
 }
 
-body > div:first-child a {
+.top-nav a {
     padding: 6px 12px;
     border-radius: 6px;
     color: var(--muted);
@@ -77,26 +77,37 @@ body > div:first-child a {
     transition: color 0.15s, background-color 0.15s;
 }
 
-body > div:first-child a:hover {
+.top-nav a:hover {
     color: var(--text);
     background: var(--surface);
 }
 
 /* Home page layout: genres column on the left, games on the right */
 
-body:has(> nav) {
+body:has(> .genre-nav) {
     display: grid;
     grid-template-columns: var(--side-nav-width) minmax(0, 1fr);
     grid-template-rows: auto 1fr;
 }
 
-body:has(> nav) > div:first-child {
+body:has(> .genre-nav) > .top-nav {
     grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+body:has(> .genre-nav) > .genre-nav {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+body:has(> .genre-nav) > .game-list {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 /* Genre nav */
 
-body > nav {
+.genre-nav {
     position: sticky;
     top: var(--top-nav-height);
     align-self: start;
@@ -106,7 +117,7 @@ body > nav {
     border-right: 1px solid var(--border);
 }
 
-body > nav h2 {
+.genre-nav h2 {
     margin: 0 0 10px;
     padding: 0 12px;
     color: var(--muted);
@@ -116,7 +127,7 @@ body > nav h2 {
     text-transform: uppercase;
 }
 
-body > nav ul {
+.genre-nav ul {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -125,7 +136,7 @@ body > nav ul {
     list-style: none;
 }
 
-body > nav a {
+.genre-nav a {
     display: block;
     padding: 7px 12px;
     border-radius: 6px;
@@ -134,14 +145,14 @@ body > nav a {
     transition: color 0.15s, background-color 0.15s;
 }
 
-body > nav a:hover {
+.genre-nav a:hover {
     color: var(--text);
     background: var(--surface);
 }
 
 /* Game list */
 
-body > nav + div {
+.game-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     align-content: start;
@@ -149,14 +160,14 @@ body > nav + div {
     padding: 32px;
 }
 
-body > nav + div > h1 {
+.game-list > h1 {
     grid-column: 1 / -1;
     margin-bottom: 8px;
 }
 
 /* Game card */
 
-body > nav + div > div {
+.game-card {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -167,26 +178,26 @@ body > nav + div > div {
     transition: background-color 0.15s, border-color 0.15s;
 }
 
-body > nav + div > div:hover {
+.game-card:hover {
     background: var(--surface-hover);
     border-color: #30343e;
 }
 
 /* Name */
-body > nav + div > div > div:nth-child(1) {
+.game-card > div:nth-child(1) {
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: -0.01em;
 }
 
 /* Developers | year */
-body > nav + div > div > div:nth-child(2) {
+.game-card > div:nth-child(2) {
     color: var(--muted);
     font-size: 0.85rem;
 }
 
 /* Genres */
-body > nav + div > div > div:nth-child(3) {
+.game-card > div:nth-child(3) {
     color: var(--accent);
     font-size: 0.72rem;
     font-weight: 600;
@@ -195,14 +206,14 @@ body > nav + div > div > div:nth-child(3) {
 }
 
 /* Description */
-body > nav + div > div > div:nth-child(4) {
+.game-card > div:nth-child(4) {
     margin-top: 6px;
     color: #b6bac4;
     font-size: 0.9rem;
 }
 
 /* Edit / delete links */
-body > nav + div > div > div:nth-child(5) {
+.game-card > div:nth-child(5) {
     display: flex;
     gap: 16px;
     margin-top: auto;
@@ -210,35 +221,35 @@ body > nav + div > div > div:nth-child(5) {
     font-size: 0.82rem;
 }
 
-body > nav + div > div > div:nth-child(5) a {
+.game-card > div:nth-child(5) a {
     color: var(--muted);
     transition: color 0.15s;
 }
 
-body > nav + div > div > div:nth-child(5) a:hover {
+.game-card > div:nth-child(5) a:hover {
     color: var(--text);
 }
 
-body > nav + div > div > div:nth-child(5) a[href^="/delete"]:hover {
+.game-card > div:nth-child(5) a[href^="/delete"]:hover {
     color: var(--danger);
 }
 
 /* Form pages (add, edit, delete) */
 
-body > h1,
-body > h1 + div,
+.page-title,
+.error,
 body > form {
     width: min(520px, calc(100% - 40px));
     margin-inline: auto;
 }
 
-body > h1 {
+.page-title {
     margin-top: 48px;
     margin-bottom: 24px;
 }
 
 /* Error message */
-body > h1 + div {
+.error {
     margin-bottom: 20px;
     padding: 10px 14px;
     color: var(--danger);
@@ -324,11 +335,11 @@ form[action$="/delete"] button:hover {
 /* Small screens: genres become a scrollable row above the games */
 
 @media (max-width: 700px) {
-    body:has(> nav) {
+    body:has(> .genre-nav) {
         display: block;
     }
 
-    body > nav {
+    .genre-nav {
         position: static;
         height: auto;
         padding: 16px 12px;
@@ -336,16 +347,16 @@ form[action$="/delete"] button:hover {
         border-bottom: 1px solid var(--border);
     }
 
-    body > nav ul {
+    .genre-nav ul {
         flex-direction: row;
         overflow-x: auto;
     }
 
-    body > nav a {
+    .genre-nav a {
         white-space: nowrap;
     }
 
-    body > nav + div {
+    .game-list {
         padding: 20px;
     }
 }

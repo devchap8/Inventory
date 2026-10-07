@@ -9,10 +9,10 @@
 <body>
     <%- include("partials/topNav.ejs") %>
 
-    <h1>Edit <%= game.name %></h1>
+    <h1 class="page-title">Edit <%= game.name %></h1>
 
     <% if(error) { %>
-        <div>Error: <%= error %></div>
+        <div class="error">Error: <%= error %></div>
     <% } %>
 
     <form action="/edit/<%= game.id %>" method="POST">

@@ -8,10 +8,10 @@
 </head>
 <body>
     <%- include("partials/topNav.ejs") %>
-    <h1>Delete <%= game.name %></h1>
+    <h1 class="page-title">Delete <%= game.name %></h1>
 
     <% if(error) { %>
-        <div>Error: <%= error %></div>
+        <div class="error">Error: <%= error %></div>
     <% } %>
 
     <form action="/delete/<%= game.id %>/delete" method="POST">
